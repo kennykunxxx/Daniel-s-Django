@@ -1,0 +1,54 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="{% static 'css/main.css' %}" type="text/css" />
+        <title> 
+        
+        {% block title %} {% endblock %}
+        
+        </title>
+        {% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+    </head>
+    
+<body class='container'>
+    {% if user.is_authenticated %}
+    <header class='header'>
+    <nav class = 'nav-bar' >
+        <a href="{% url 'movie:user_list' %}">Movie List</a>
+        
+        <a href="{% url 'dvd:cart_detail' %}">
+            Cart
+            {% with item=cart|length %}
+            {% if cart|length > 0 %}
+            ({{ item }} item{{item|pluralize}})
+            {% else %}
+            ( 0 item )
+            {% endif %}
+            {% endwith %}
+            </a>
+        <a href="{% url 'login:logout' %}">Logout</a>  
+    </nav>
+    </header>
+  
+    
+    {% else %}
+    
+    <header class='header'>
+    <nav class = 'nav-bar' >
+        <a href="{% url 'login:login' %}">Login</a>
+        
+        <a href="/">Register</a>
+    </nav>
+    </header>
+     
+    {% endif %}
+    {% block content %} {% endblock %}
+</body>    
+</html>

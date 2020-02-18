@@ -1,0 +1,24 @@
+{% extends 'movie/base.html' %}
+
+{% block title %} 
+Your list 
+{% endblock %}
+
+{% block content %} 
+
+{% for movie in movie_list %}
+<h1> {{ movie.title }} </h1>
+<h2> {{ movie.description|truncatewords:30 }}</h2>
+<h3> Released in {{ movie.year }}</h3>
+<form action = "{% url 'movie:delete_movie' movie.id %}" method='get'>
+    <input type="submit" value="Delete"/>
+</form>
+<form action="{% url 'dvd:add_movie' movie.id %}" method='post'>
+    {% csrf_token %}
+    {{form}}
+    <input type='submit' value='add to cart'>
+</form>
+{% empty %}
+<h1> No Movies has been added yet </h1> 
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'movie/base.html' %}
+
+{% block title %} Your Search Results {% endblock %}
+
+{% block content %}
+<h1>
+    Your Search results
+</h1>
+
+<h2>
+{% for search in searches.results%}
+<p>
+<a href= "{% url 'movie:detail' search.id %}">{{search.title}} </a>
+<h2> {{search.release_date}} </h2>
+<form action = "{% url 'movie:add' search.id %}" method = 'post'>
+    {% csrf_token %}
+    <input type="submit" value="add"/>
+</form>
+</p>
+{% endfor %}
+</h2>
+
+<h3>
+    {{test}}
+    
+</h3>
+
+{% endblock %}
+

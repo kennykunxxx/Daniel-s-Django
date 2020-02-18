@@ -1,0 +1,18 @@
+{% extends 'movie/base.html' %}
+
+{% block title %}
+Home
+{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+
+{% else %}
+<div class='full-height-grow main-text'>
+<h1 class='main-texts'> Create your own movie list and buy them </h1>
+<a href="{% url 'login:login' %}" class='btn'> Join now </a>
+</div>
+{% endif %}
+
+{% endblock %}
+

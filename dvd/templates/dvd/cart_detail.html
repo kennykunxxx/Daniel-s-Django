@@ -1,0 +1,28 @@
+{% extends 'movie/base.html' %}
+
+{% block title %}
+Cart Details
+{% endblock %}
+
+{% block content %}
+
+{% for item in cart %}
+
+<p>{{ item }} </p>
+<p>{{item.total_price}}</p>
+<p>{{item.dvd}}</p>
+<p>{{item.dvd.title}}</p>
+
+{% empty %}
+
+There are no items
+
+{% endfor %}
+
+<form action='.' method='post'>
+    {% csrf_token %}
+    {{form}}
+    <input type='submit' value='buy'>
+</form>
+
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'movie/base.html' %}
+
+{% block title %} Dash Board {% endblock %}
+
+{% block content %} 
+
+<h1>Welcome Home</h1>
+
+{% if length_list > 0 %}
+<h2>
+    Begin by searching for a movie or edit your <a href="{% url 'movie:user_list' %}"> movie list </a>
+</h2>
+
+<form action='search/' method='get'>
+    <input type="text" name="q"/>
+    <input type="submit" value="Search"/>
+</form>
+
+{% else %}
+
+<h2> Begin by Searching for a movie </h2>
+
+<form action='search/' method='get'>
+    <input type="text" name="q"/>
+    <input type="submit" value="Submit"/>
+</form>
+
+{% endif %}
+
+
+
+
+{% endblock %}
